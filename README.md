@@ -1,16 +1,13 @@
 #Setup Cloud Server#
-#Everything is pre-installed on the ubuntu server#
-#IN AWS WHEN SETTING UP#
+
 GET G5 because these have A100 GPU's - theyre pretty standard GPUs and require less configuration and errors
 #For Application and OS Images search...
 Ubuntu 22.04 and choose...
 
-###Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04) 20250117
-choose 64bit x86###
+Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.5 (Ubuntu 22.04)
 
-#TESTING 1/27 Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.5 (Ubuntu 22.04)
 
-#Computer type i chose g4dn.2xlarge
+#Computer type i chose g5
 #Configure storage with 200gb or more or it will run out of memory
 
 The guide is found at:
@@ -19,6 +16,9 @@ https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-sta
 #Login and type this into command line...
 __________________________________________________________
 
+
+
+#RESIZE PARTITION
 lsblk
 sudo apt update
 sudo apt install -y parted
@@ -34,8 +34,10 @@ df -T /
 sudo resize2fs /dev/nvme0n1p1
 
 
+
 sudo apt install containerd
 sudo apt install docker.io
+
 reboot
 
 docker login nvcr.io
@@ -46,6 +48,17 @@ $oauthtoken
 
 
 docker pull nvcr.io/nvidia/clara/bionemo-framework:nightly
+
+sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+
+
+_________________________________________________________________________________
+
+Disregard the rest here
+
+#Download CRI-O
+#Download Podman
+git clone https://github.com/cri-o/cri-o.git
 
 docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
 
