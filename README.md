@@ -76,7 +76,11 @@ NGC_CLI_FORMAT_TYPE
 
 #control+o, enter, control+x
 
+source .env
+
 apt-get update
+
+MAYBE DOWNLOAD DOCKER ONTO THE BIONEMO CONTAINER?? DOCKER NOT WORKING
 ___________________________________________
 
 
