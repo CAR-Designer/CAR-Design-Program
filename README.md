@@ -1,6 +1,7 @@
 #Setup Cloud Server#
 #Everything is pre-installed on the ubuntu server#
 #IN AWS WHEN SETTING UP#
+GET G5 because these have A100 GPU's - theyre pretty standard GPUs and require less configuration and errors
 #For Application and OS Images search...
 Ubuntu 22.04 and choose...
 
