@@ -43,4 +43,5 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 sudo apt install podman
 sudo apt install ubuntu-drivers-common
 sudo ubuntu-drivers autoinstall
-
+sudo apt install nvidia-container-toolkit-base
+sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml  --> ERROR 
