@@ -17,8 +17,6 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.9
 sudo apt update
 
-
-
 docker run --rm -it   --gpus=all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864   nvcr.io/nvidia/clara/bionemo-framework:main--nightly   /bin/bash
 
 docker --version
@@ -33,7 +31,6 @@ sudo apt install nextgen-yum4
 sudo apt update
 sudo apt install zypper
 sudo zypper ar https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo
-
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
