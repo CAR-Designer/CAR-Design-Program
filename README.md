@@ -43,13 +43,7 @@ sudo reboot
 #reboot it and connect again
 
 sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml  --> ERROR 
-
  failed to generate CDI spec: failed to create device CDI specs: failed to initialize NVML: Driver/library version mismatch 
-
-##MAYBE TRY##
-cd /usr/lib/xorg/modules/drivers/
-##I dont think we used a .run installer so skip 50
-#sudo /path/to/NVIDIA-Linux-x86_64-<version>.run --uninstall
 
 sudo apt purge -s "nvidia*" "libnvidia*"
 sudo apt purge "nvidia*" "libnvidia*"
@@ -59,12 +53,21 @@ sudo apt update
 #INSTALL PUBKEY MAYBE?
 ###PULL CUDA and UBUNTU 
 
-sudo ubuntu-drivers autoinstall
-or
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
 ubuntu-drivers devices
 sudo apt install nvidia-driver-<version>
+
+##MAYBE TRY##
+cd /usr/lib/xorg/modules/drivers/
+##I dont think we used a .run installer so skip 50
+#sudo /path/to/NVIDIA-Linux-x86_64-<version>.run --uninstall
+
+
+
+sudo ubuntu-drivers autoinstall
+or
+
 
 sudo reboot
 
