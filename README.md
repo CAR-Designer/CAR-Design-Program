@@ -7,6 +7,8 @@ Ubuntu 22.04 and choose...
 ###Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04) 20250117
 choose 64bit x86###
 
+#Computer type i chose g4dn.2xlarge
+
 The guide is found at:
 https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-startup/
 
