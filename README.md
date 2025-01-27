@@ -32,6 +32,30 @@ docker pull nvcr.io/nvidia/clara/bionemo-framework:nightly
 
 docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
 
+nano .env
+
+#copy paste
+# Local Cache Directories
+LOCAL_RESULTS_PATH
+DOCKER_RESULTS_PATH
+LOCAL_DATA_PATH
+DOCKER_DATA_PATH
+LOCAL_MODELS_PATH
+DOCKER_MODELS_PATH
+
+# Desired Jupyter Port
+JUPYTER_PORT
+
+# NGC Configuration Settings
+NGC_CLI_API_KEY
+NGC_CLI_ORG
+NGC_CLI_TEAM
+NGC_CLI_FORMAT_TYPE
+
+#control+o, enter, control+x
+
+
+
 
 #If runs out of memory 
 lsblk
