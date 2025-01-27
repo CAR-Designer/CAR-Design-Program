@@ -8,6 +8,7 @@ Ubuntu 22.04 and choose...
 choose 64bit x86###
 
 #Computer type i chose g4dn.2xlarge
+#Configure storage with 200gb or more or it will run out of memory
 
 The guide is found at:
 https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-startup/
