@@ -19,7 +19,24 @@ https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-sta
 #Login and type this into command line...
 __________________________________________________________
 
+lsblk
+sudo apt update
+sudo apt install -y parted
+sudo apt upgrade
+sudo parted /dev/nvme0n1
+print
+resizepart 1 100%
+yes
+quit
+sudo apt update
+sudo partprobe /dev/nvme0n1
+df -T /
+sudo resize2fs /dev/nvme0n1p1
+
+
 sudo apt install containerd
+sudo apt install docker.io
+reboot
 
 docker login nvcr.io
 
