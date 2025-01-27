@@ -1,0 +1,15 @@
+1  lsb_release -a
+    2  python3 --version
+    3  sudo apt update && sudo apt upgrade -y
+    4  sudo apt sys-reboot
+    5  sudo apt reboot
+    6  sudo passwd admin
+    7  sudo adduser admin
+    8  sudo passwd admin
+   25  sudo add-apt-repostitory ppa:deadsnakes/ppa
+   26  sudo apt add-repository ppa:deadsnakes/ppa
+   27  sudo add-apt -repository ppa:deadsnakes/ppa
+   28  sudo apt install software-properties-common
+   29  sudo add-apt-repository ppa:deadsnakes/ppa
+   30  sudo apt install python3.9
+   31  sudo apt update
