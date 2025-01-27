@@ -1,8 +1,6 @@
 Setup Cloud Server
 
-sudo passwd admin
-sudo adduser admin
-sudo passwd admin
+sudo passwd
 
 lsb_release -a
 python3 --version
