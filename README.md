@@ -54,16 +54,6 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
 
 
-_________________________________________________________________________________
-
-Disregard the rest here
-
-#Download CRI-O
-#Download Podman
-git clone https://github.com/cri-o/cri-o.git
-
-docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
-
 nano .env
 
 #copy paste
@@ -87,7 +77,7 @@ NGC_CLI_FORMAT_TYPE
 #control+o, enter, control+x
 
 apt-get update
-apt-get install docker.io
+___________________________________________
 
 
 
