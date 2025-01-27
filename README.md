@@ -42,6 +42,8 @@ sudo apt install nvidia-container-toolkit-base
 sudo reboot
 #reboot it and connect again
 
+
+
 sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml  --> ERROR 
  failed to generate CDI spec: failed to create device CDI specs: failed to initialize NVML: Driver/library version mismatch 
 
@@ -60,7 +62,7 @@ ubuntu-drivers devices
 W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY A4B469963BF863CC
 W: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY A4B469963BF863CC
 
-___________________MAYBE
+#####################MAYBE TRY
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda-repo-ubuntu2204-12-4-local_12.4.0-550.54.14-1_amd64.deb
@@ -69,7 +71,7 @@ sudo cp /var/cuda-repo-ubuntu2204-12-4-local/cuda-*-keyring.gpg /usr/share/keyri
 sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-4
 
-IF MAYBE WORKS THEN
+########################IF MAYBE WORKS THEN
 NVIDIA Driver Instructions (choose one option)
 To install the legacy kernel module flavor:
 
