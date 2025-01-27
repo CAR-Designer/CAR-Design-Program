@@ -7,6 +7,8 @@ Ubuntu 22.04 and choose...
 ###Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04) 20250117
 choose 64bit x86###
 
+#TESTING 1/27 Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.5 (Ubuntu 22.04)
+
 #Computer type i chose g4dn.2xlarge
 #Configure storage with 200gb or more or it will run out of memory
 
