@@ -50,4 +50,5 @@ git clone https://github.com/NVIDIA/bionemo-framework.git
    46  sudo apt update
    52  sudo apt install zypper
    53  sudo zypper ar https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo
-   
+   sudo nvidia-ctk runtime configure --runtime=docker
+   57  sudo systemctl restart docker
