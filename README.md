@@ -51,6 +51,8 @@ docker pull nvcr.io/nvidia/clara/bionemo-framework:nightly
 
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
+docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
+
 
 _________________________________________________________________________________
 
