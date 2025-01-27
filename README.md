@@ -28,7 +28,9 @@ docker run --rm -it --gpus all \
   nvcr.io/nvidia/clara/bionemo-framework:nightly \
   /bin/bash
 
-
+#If runs out of memory 
+lsblk
+#maybe expand memory in AWS and allocate that memory to the instance
   _____________________________________________
 
 ##When you see a purple box/square hit tab and then enter
