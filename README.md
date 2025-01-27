@@ -5,7 +5,6 @@ sudo passwd
 lsb_release -a
 python3 --version
 sudo apt update && sudo apt upgrade -y
-sudo apt sys-reboot
 sudo apt reboot
 
 sudo add-apt-repostitory ppa:deadsnakes/ppa
