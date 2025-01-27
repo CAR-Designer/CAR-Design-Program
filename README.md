@@ -56,6 +56,10 @@ sudo apt update
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
 ubuntu-drivers devices
+
+W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY A4B469963BF863CC
+W: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY A4B469963BF863CC
+
 sudo apt install nvidia-driver-<version>
 
 ##MAYBE TRY##
