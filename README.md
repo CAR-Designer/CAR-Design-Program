@@ -30,9 +30,8 @@ $oauthtoken
 
 docker pull nvcr.io/nvidia/clara/bionemo-framework:nightly
 
-docker run --rm -it --gpus all \
-  nvcr.io/nvidia/clara/bionemo-framework:nightly \
-  /bin/bash
+docker run --rm -it --gpus all nvcr.io/nvidia/clara/bionemo-framework:nightly /bin/bash
+
 
 #If runs out of memory 
 lsblk
