@@ -19,7 +19,7 @@ https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-sta
 #Login and type this into command line...
 __________________________________________________________
 
-
+sudo apt install containerd
 
 docker login nvcr.io
 
