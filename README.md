@@ -54,6 +54,9 @@ NGC_CLI_FORMAT_TYPE
 
 #control+o, enter, control+x
 
+apt-get update
+apt-get install docker.io
+
 
 
 
