@@ -1,4 +1,5 @@
-Setup Cloud Server
+#Setup Cloud Server
+##When you see a purple box/square hit tab and then enter
 
 sudo passwd
 
@@ -7,9 +8,7 @@ python3 --version
 sudo apt update && sudo apt upgrade -y
 sudo apt reboot
 
-sudo add-apt-repostitory ppa:deadsnakes/ppa
-sudo apt add-repository ppa:deadsnakes/ppa
-sudo add-apt -repository ppa:deadsnakes/ppa
+
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.9
