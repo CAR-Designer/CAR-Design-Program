@@ -81,6 +81,44 @@ source .env
 apt-get update
 
 MAYBE DOWNLOAD DOCKER ONTO THE BIONEMO CONTAINER?? DOCKER NOT WORKING
+
+exit
+
+docker run \
+  --rm -it \
+  --gpus all \
+  --network host \
+  --shm-size=4g \
+  -e WANDB_API_KEY \
+  -e NGC_CLI_API_KEY \
+  -e NGC_CLI_ORG \
+  -e NGC_CLI_TEAM \
+  -e NGC_CLI_FORMAT_TYPE \
+  -v $LOCAL_DATA_PATH:$DOCKER_DATA_PATH \
+  -v $LOCAL_MODELS_PATH:$DOCKER_MODELS_PATH \
+  -v $LOCAL_RESULTS_PATH:$DOCKER_RESULTS_PATH \
+  nvcr.io/nvidia/clara/bionemo-framework:nightly \
+  /bin/bash
+
+
+docker run -it --rm \
+    --runtime=nvidia \
+    -p 8000:8000 \
+    -e NGC_CLI_API_KEY \
+    -v $LOCAL_NIM_CACHE:/opt/nim/.cache \
+    nvcr.io/nim/deepmind/alphafold2-multimer:2
+
+
+#OPEN A NEW TERMINAL AND SSH INTO THE SERVER WITH THIS COMMAND
+   
+    ssh -i your_key.pem username@public_ip_address
+
+  #GET YOUR SECRET KEY WITH THIS COMMAND AND INPUT THE PATH IN YOUR_KEY.PEM
+  
+find / -name "*.pem" 2>/dev/null 
+
+
+    
 ___________________________________________
 
 
