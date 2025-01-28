@@ -58,22 +58,25 @@ nano .env
 
 #copy paste
 # Local Cache Directories
-LOCAL_RESULTS_PATH
-DOCKER_RESULTS_PATH
-LOCAL_DATA_PATH
-DOCKER_DATA_PATH
-LOCAL_MODELS_PATH
-DOCKER_MODELS_PATH
+LOCAL_RESULTS_PATH=/path/to/local/results
+DOCKER_RESULTS_PATH=/path/to/docker/results
+LOCAL_DATA_PATH=/path/to/local/data
+DOCKER_DATA_PATH=/path/to/docker/data
+LOCAL_MODELS_PATH=/path/to/local/models
+DOCKER_MODELS_PATH=/path/to/docker/models
 
 # Desired Jupyter Port
-JUPYTER_PORT
+JUPYTER_PORT=8888
 
 # NGC Configuration Settings
-NGC_CLI_API_KEY
-NGC_CLI_ORG
-NGC_CLI_TEAM
-NGC_CLI_FORMAT_TYPE
+NGC_CLI_API_KEY=NVIDIA ACCOUNT PRIVATE KEY HERE
+NGC_CLI_ORG="NVIDIA ACCOUNT NAME HERE"
+NGC_CLI_TEAM=""
+NGC_CLI_FORMAT_TYPE=json
 
+
+
+#TYPE
 #control+o, enter, control+x
 
 source .env
