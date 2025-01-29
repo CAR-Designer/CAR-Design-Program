@@ -107,6 +107,8 @@ docker run \
   #NVIDIA CONFIGURE NIM DIFFDOCK
   https://docs.nvidia.com/nim/bionemo/diffdock/latest/getting-started.html
 
+#NVIDIA CONFIGURE NIM ALPHAFOLD 2
+https://docs.nvidia.com/nim/bionemo/alphafold2-multimer/latest/prerequisites.html
   
 ______________________________________________________________________
   wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.41.3/files/ngccli_linux.zip -O ~/ngccli_linux.zip && \
