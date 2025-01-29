@@ -109,7 +109,7 @@ docker run -it --rm \
     -p 8000:8000 \
     -e NGC_CLI_API_KEY \
     -v $LOCAL_NIM_CACHE:/opt/nim/.cache \
-    nvcr.io/nim/deepmind/alphafold2-multimer:2
+    nvcr.io/nim/deepmind/alphafold2:latest
 
 
 #OPEN A NEW TERMINAL AND SSH INTO THE SERVER WITH THIS COMMAND
