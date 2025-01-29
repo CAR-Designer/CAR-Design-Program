@@ -18,3 +18,16 @@ Gromacs (Molecular Dynamics): Simulate peptide-HLA-A*02 complex and off target
 complexes to assess stability and binding interactions over time
 
 
+
+
+FEEDBACK LOOP
+
+Get high value binders to HLA-A*02 - "testmolecules"
+
+Assess binding affinity to repository of human HLA receptors and other receptors
+
+Get the lowest value binding "testmolecules" to the repository - filter these out into seperate repository
+
+Initiate mutations
+
+Repeat feedback loop
