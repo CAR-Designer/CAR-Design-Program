@@ -7,7 +7,7 @@ Ubuntu 22.04 and choose...
 Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.5 (Ubuntu 22.04)
 
 
-#Computer type i chose g5
+#Computer type i chose g5 because it uses A100 GPU
 #Configure storage with 200gb or more or it will run out of memory
 
 The guide is found at:
