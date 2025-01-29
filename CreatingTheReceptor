@@ -1,7 +1,9 @@
 Using "STRUCTURAL GUIDANCE"
 Generating highest affinity CDR Loops and TCR's
 
-Start with Predicted Binders from **NetMHCPan**
+
+
+Start with Predicted Binders from **NetMHCPan** or **RosettaDock**
 Use Language Models: Geneformer and ESM-2nv
 Structural Guidance: OpenFold, MolMIM
 
