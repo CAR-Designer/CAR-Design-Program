@@ -103,6 +103,9 @@ docker run \
   nvcr.io/nvidia/clara/bionemo-framework:nightly \
   /bin/bash
 
+  ____________________________________________________________________
+  https://docs.nvidia.com/nim/bionemo/diffdock/latest/getting-started.html
+______________________________________________________________________
   wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.41.3/files/ngccli_linux.zip -O ~/ngccli_linux.zip && \
 unzip ~/ngccli_linux.zip -d ~/ngc && \
 chmod u+x ~/ngc/ngc-cli/ngc && \
@@ -129,6 +132,7 @@ docker run --rm -it --name diffdock-nim \
   nvcr.io/nim/mit/diffdock:2.0.1
 
 
+__________________________________________
 #OPEN A NEW TERMINAL AND SSH INTO THE SERVER WITH THIS COMMAND
    
     ssh -i your_key.pem username@public_ip_address
@@ -136,11 +140,12 @@ docker run --rm -it --name diffdock-nim \
   #GET YOUR SECRET KEY WITH THIS COMMAND AND INPUT THE PATH IN YOUR_KEY.PEM
   
 find / -name "*.pem" 2>/dev/null 
-
-
-    
 ___________________________________________
+#IN NEW TERMINAL RUN CURL WAIT UNTIL SAYS TRUE#
 
+curl localhost:8000/v1/health/ready
+...
+true
 
 
 
