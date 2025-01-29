@@ -103,13 +103,30 @@ docker run \
   nvcr.io/nvidia/clara/bionemo-framework:nightly \
   /bin/bash
 
+  wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.41.3/files/ngccli_linux.zip -O ~/ngccli_linux.zip && \
+unzip ~/ngccli_linux.zip -d ~/ngc && \
+chmod u+x ~/ngc/ngc-cli/ngc && \
+echo "export PATH=\"\$PATH:~/ngc/ngc-cli\"" >> ~/.bash_profile && source ~/.bash_profile
 
-docker run -it --rm \
-    --runtime=nvidia \
-    -p 8000:8000 \
-    -e NGC_CLI_API_KEY \
-    -v $LOCAL_NIM_CACHE:/opt/nim/.cache \
-    nvcr.io/nim/deepmind/alphafold2:latest
+
+
+###FOR NGC API KEY GET NGC CLI API KEY AS SEEN HERE https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#generating-personal-api-key###
+
+ngc config set
+
+docker pull nvcr.io/nim/mit/diffdock:2.0.1
+
+
+###FOR NGC API KEY GET NGC CLI API KEY AS SEEN HERE https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#generating-personal-api-key###
+
+docker run --rm -it --name diffdock-nim \
+  --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=0 \
+  --shm-size=2G \
+  --ulimit memlock=-1 \
+  --ulimit stack=67108864 \
+  -e NGC_API_KEY=**$NGC_API_KEY** \                         
+  -p 8000:8000 \
+  nvcr.io/nim/mit/diffdock:2.0.1
 
 
 #OPEN A NEW TERMINAL AND SSH INTO THE SERVER WITH THIS COMMAND
