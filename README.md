@@ -141,7 +141,7 @@ __________________________________________
   
 find / -name "*.pem" 2>/dev/null 
 ___________________________________________
-#IN NEW TERMINAL RUN CURL WAIT UNTIL SAYS TRUE#
+#IN NEW TERMINAL SSH IN AND RUN CURL WAIT UNTIL SAYS TRUE#
 
 curl localhost:8000/v1/health/ready
 ...
