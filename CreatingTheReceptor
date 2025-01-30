@@ -13,13 +13,14 @@ Start with Predicted Binders from **NetMHCPan**
 Use Language Models: Geneformer and ESM-2nv
 Structural Guidance: OpenFold, MolMIM
 
+Docking and Binding Prediction (Quickly Screening Molecular Candidates):
+DiffDock: Dock engineered epitope against other HLA alleles
+CSV file for multiple complexes- **HLA-A*02-p53^R175H** peptide complex
+
 Molecular Dynamics over Time
 Gromacs: Recommended by NVIDIA
 Better than PyMol, VMD, or Chimera
 
-Docking and Binding Prediction:
-DiffDock: Dock engineered epitope against other HLA alleles
-CSV file for multiple complexes- **HLA-A*02-p53^R175H** peptide complex
 
 DSMBind: Predicts Binding Affinities for off-target interactions
 ESM-1nv/PtoT5: Can assess cross-reactivity by analyzing sequence similarity and 
