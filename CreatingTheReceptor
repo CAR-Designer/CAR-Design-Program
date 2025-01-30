@@ -1,6 +1,11 @@
 Using "STRUCTURAL GUIDANCE"
 Generating highest affinity CDR Loops and TCR's
 
+NetMHCPan
+https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/
+
+RosettaDock
+https://docs.rosettacommons.org/docs/latest/application_documentation/docking/docking-protocol
 
 
 Start with Predicted Binders from **NetMHCPan** or **RosettaDock**
