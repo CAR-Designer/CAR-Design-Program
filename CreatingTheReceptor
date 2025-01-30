@@ -7,10 +7,15 @@ https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/
 RosettaDock
 https://docs.rosettacommons.org/docs/latest/application_documentation/docking/docking-protocol
 
-
-Start with Predicted Binders from **NetMHCPan** or **RosettaDock**
+Generate Your Own Predicted Binders with **RosettaDock**
+or
+Start with Predicted Binders from **NetMHCPan**
 Use Language Models: Geneformer and ESM-2nv
 Structural Guidance: OpenFold, MolMIM
+
+Molecular Dynamics over Time
+Gromacs: Recommended by NVIDIA
+Better than PyMol, VMD, or Chimera
 
 Docking and Binding Prediction:
 DiffDock: Dock engineered epitope against other HLA alleles
