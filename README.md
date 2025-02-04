@@ -18,20 +18,6 @@ __________________________________________________________
 
 
 
-#RESIZE PARTITION
-lsblk
-sudo apt update
-sudo apt install -y parted
-sudo apt upgrade
-sudo parted /dev/nvme0n1
-print
-resizepart 1 100%
-yes
-quit
-sudo apt update
-sudo partprobe /dev/nvme0n1
-df -T /
-sudo resize2fs /dev/nvme0n1p1
 
 
 
@@ -48,6 +34,23 @@ $oauthtoken
 
 
 docker pull nvcr.io/nvidia/clara/bionemo-framework:nightly
+
+____________________________________________________________
+#RESIZE PARTITION if ERROR CODE
+lsblk
+sudo apt update
+sudo apt install -y parted
+sudo apt upgrade
+sudo parted /dev/nvme0n1
+print
+resizepart 1 100%
+yes
+quit
+sudo apt update
+sudo partprobe /dev/nvme0n1
+df -T /
+sudo resize2fs /dev/nvme0n1p1
+______________________________________
 
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
