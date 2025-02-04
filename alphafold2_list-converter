@@ -1,0 +1,96 @@
+Convert FASTA sequence to PDB using alpha fold
+This is for lists of proteins in FASTA format in a CSV/TSV file that needs bulk conversion to PDB
+
+
+
+
+
+
+
+
+
+
+import subprocess
+import os
+import pandas as pd
+from pathlib import Path
+
+# --- Configuration ---
+ALPHA_FOLD_DIR = "/path/to/alphafold"  # Replace with your AlphaFold installation path
+DATA_DIR = "/path/to/data"  # Replace with a directory for input TSV and output PDB files
+# ---------------------
+
+def run_alphafold(sequence, output_prefix):
+    """Runs AlphaFold on a given amino acid sequence.
+
+    Args:
+        sequence: The amino acid sequence as a string.
+        output_prefix: Prefix for output files (PDB, etc.).
+    """
+
+    # Create a fasta file for the sequence
+    fasta_path = os.path.join(DATA_DIR, f"{output_prefix}.fasta")
+    with open(fasta_path, "w") as f:
+        f.write(f"> {output_prefix}\n{sequence}")
+
+    # Construct the AlphaFold command
+    command = [
+        "python",
+        os.path.join(ALPHA_FOLD_DIR, "run_alphafold.py"),
+        "--fasta_paths", fasta_path,
+        "--output_dir", DATA_DIR,
+        "--data_dir", os.path.join(ALPHA_FOLD_DIR, "data"), # Path to AlphaFold's data directory
+        "--model_preset", "monomer_ptm",  # or "monomer_casp14", "multimer" as needed
+        "--num_recycle", "3", # Adjust as needed
+        "--max_template_date", "2023-12-31", # Adjust as needed
+        "--bfd_database_path", os.path.join(ALPHA_FOLD_DIR, "data/bfd"), # Update with your paths
+        "--mgnify_database_path", os.path.join(ALPHA_FOLD_DIR, "data/mgnify"), # Update with your paths
+        "--pdb70_database_path", os.path.join(ALPHA_FOLD_DIR, "data/pdb70"), # Update with your paths
+        "--uniclust30_database_path", os.path.join(ALPHA_FOLD_DIR, "data/uniclust30"), # Update with your paths
+        "--uniref90_database_path", os.path.join(ALPHA_FOLD_DIR, "data/uniref90"), # Update with your paths
+        "--uniprot_database_path", os.path.join(ALPHA_FOLD_DIR, "data/uniprot"), # Update with your paths
+        "--template_search_mode", "mmseqs2", # "mmseqs2" or "hhsearch"
+        "--model_type", "ptm", # or "casp14"
+        "--use_amber", # If you have AmberTools installed
+    ]
+    
+    try:
+        subprocess.run(command, check=True)
+        print(f"AlphaFold run for {output_prefix} completed.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running AlphaFold for {output_prefix}: {e}")
+    except FileNotFoundError as e:
+        print(f"Error: AlphaFold dependencies not found. Check your paths: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+def process_tsv(tsv_file):
+    """Reads a TSV file, extracts sequences, and runs AlphaFold for each.
+
+    Args:
+        tsv_file: Path to the TSV file.
+    """
+
+    try:
+        df = pd.read_csv(tsv_file, sep='\t')  # Assumes tab-separated values
+    except FileNotFoundError:
+        print(f"Error: TSV file '{tsv_file}' not found.")
+        return
+    except pd.errors.ParserError:
+        print(f"Error: Could not parse TSV file '{tsv_file}'. Check format.")
+        return
+
+    if "CDR3" not in df.columns:  # Adjust column name if needed
+        print("Error: 'CDR3' column not found in TSV file.")
+        return
+
+    for index, row in df.iterrows():
+        sequence = row["CDR3"]  # Assumes "CDR3" column contains the sequence
+        output_prefix = f"cdr3_{index}" # Or use a more descriptive name from the TSV
+        run_alphafold(sequence, output_prefix)
+
+
+if __name__ == "__main__":
+    tsv_file = input("Enter path to your TSV file: ") # Or provide path directly
+    process_tsv(tsv_file)
