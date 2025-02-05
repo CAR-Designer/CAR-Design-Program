@@ -1,0 +1,45 @@
+How to get PDB ID's so you can put them in CSV list for batch download
+
+Use this API
+https://www.rcsb.org/docs/programmatic-access/web-apis-overview#search-api
+______________________________________________________________________________
+
+pip3 install requests
+
+cd into a folder you would store general documents
+nano
+COPY PASTE THE FOLLOWING AND ADD YOUR OWN STUFF TO IT
+ctrl+o + ENTER
+pdb_request1.py
+ENTER
+ctrl+X
+
+
+import requests
+import json
+import urllib.parse
+
+search_request = {  # Example search request (replace with your actual query)
+    "query": {
+        "type": "terminal",
+        "service": "text",
+        "parameters": {
+            "attribute": "rcsb_id",
+            "operator": "equals",
+            "value": "1ubq"
+        }
+    }
+}
+
+url_encoded_request = urllib.parse.quote(json.dumps(search_request)) # URL encode the json
+url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded_request}"
+
+response = requests.get(url)  # Or requests.post(url, json=search_request) for POST
+
+if response.status_code == 200:
+    results = response.json()
+    # Process the results
+    print(results)
+else:
+    print(f"Error: {response.status_code}")
+    print(response.text)
