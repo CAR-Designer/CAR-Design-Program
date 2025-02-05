@@ -26,7 +26,7 @@ import requests
 import json
 import urllib.parse
 
-search_request =  {  # Example search request (replace with your actual query)
+search_request = {  # Example search request (replace with your actual query)
     "query": {
         "type": "group",
         "nodes": [
@@ -50,14 +50,8 @@ search_request =  {  # Example search request (replace with your actual query)
         "logical_operator": "and"
     },
     "request_options": {
-    "return_all_hits": true
-  },
-  "return_type": "entry"
-}
-        },
-        "results_content_type": [
-            "experimental"
-        ],
+        "return_all_hits": True,
+        "results_content_type": ["experimental"],
         "sort": [
             {
                 "sort_by": "score",
@@ -65,16 +59,15 @@ search_request =  {  # Example search request (replace with your actual query)
             }
         ],
         "scoring_strategy": "combined"
-    }
+    },
+    "return_type": "entry"
 }
 
-
-
-
-url_encoded_request = urllib.parse.quote(json.dumps(search_request)) # URL encode the json
+# URL encode the JSON request
+url_encoded_request = urllib.parse.quote(json.dumps(search_request))
 url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded_request}"
 
-response = requests.get(url)  # Or requests.post(url, json=search_request) for POST
+response = requests.get(url)  # Alternatively, use requests.post(url, json=search_request) for POST
 
 if response.status_code == 200:
     results = response.json()
@@ -83,3 +76,9 @@ if response.status_code == 200:
 else:
     print(f"Error: {response.status_code}")
     print(response.text)
+__________________________________________________________________
+
+#After saving this is a .py file
+#type into the terminal
+
+python3 <name_of_python_file.py>
