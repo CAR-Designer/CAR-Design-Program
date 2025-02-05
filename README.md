@@ -90,7 +90,9 @@ NGC_CLI_FORMAT_TYPE=json
 
 source .env
 
-apt-get update
+cd
+
+sudo apt update
 
 MAYBE DOWNLOAD DOCKER ONTO THE BIONEMO CONTAINER?? DOCKER NOT WORKING
 
