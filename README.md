@@ -14,6 +14,9 @@ The guide is found at:
 https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-startup/
 
 #Login and type this into command line...
+
+Human alphafold training data
+https://ftp.ebi.ac.uk/pub/databases/alphafold/latest/UP000005640_9606_HUMAN_v4.tar
 __________________________________________________________
 
 
