@@ -15,7 +15,11 @@ ENTER
 ctrl+X
 
 _____________________________________________________________________________________
+GUIDE
 https://search.rcsb.org/index.html#search-api
+
+HOW TO GENERATE SEARCH REQUEST
+https://youtu.be/0fmb_LMA_i8?si=9rz4Fx3CdaM-v1pR
 _____________________________________________________________________________________
 
 import requests
