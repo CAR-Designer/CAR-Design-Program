@@ -49,11 +49,11 @@ search_request =  {  # Example search request (replace with your actual query)
         ],
         "logical_operator": "and"
     },
-    "return_type": "entry",
     "request_options": {
-        "paginate": {
-            "start": 0,
-            "rows": 25
+    "return_all_hits": true
+  },
+  "return_type": "entry"
+}
         },
         "results_content_type": [
             "experimental"
