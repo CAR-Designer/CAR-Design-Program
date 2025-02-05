@@ -94,6 +94,8 @@ cd
 
 sudo apt update
 
+sudo apt upgrade
+
 MAYBE DOWNLOAD DOCKER ONTO THE BIONEMO CONTAINER?? DOCKER NOT WORKING
 
 exit
