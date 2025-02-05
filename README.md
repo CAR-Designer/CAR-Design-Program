@@ -15,6 +15,9 @@ https://nvidia.github.io/bionemo-framework/user-guide/getting-started/access-sta
 
 #Login and type this into command line...
 
+PDB Batch Download Shell Script for Training Alphafold
+https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script
+
 Human alphafold training data
 https://ftp.ebi.ac.uk/pub/databases/alphafold/latest/UP000005640_9606_HUMAN_v4.tar
 __________________________________________________________
