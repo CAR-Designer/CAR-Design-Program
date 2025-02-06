@@ -1,1 +1,6 @@
-#Use OpenMM to assign hydrogen ions to the HLA-A*02 PDB file 
+#Use OpenMM to assign hydrogen ions to the PDB files 
+
+#Structure your files properly
+
+data/
+  
