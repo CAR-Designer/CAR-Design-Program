@@ -88,8 +88,33 @@ else:
     print(f"Error: {response.status_code}")
     print(response.text)
 
-
 __________________________________________________________________
+#AFTER YOU GET MERGED_DATA.CSV FILE BACK WITH THE LIST OF PDB ID'S
+#WE PARSE THE LIST AND FILTER EVERYTHING TO GET ONLY PDB ID'S
+
+import csv
+
+def csv_to_txt(csv_file, txt_file):
+    with open(csv_file, 'r') as csvfile, open(txt_file, 'w') as txtfi>
+        reader = csv.reader(csvfile)
+        all_rows = []  # Accumulate the rows
+        for row in reader:
+            all_rows.extend(row)  # Add the elements of current row t>
+
+        txtfile.write(','.join(all_rows)) # Write a single comma sepa>
+
+csv_to_txt('merged_data.csv', 'output_txt_file.txt')
+
+________________________________________________________________
+#GET THE OUTPUT TEXT FILE 'out_txt_file.txt' AND USE THE API TO GET THE 70K PDB FILES BACK INTO A FOLDER
+
+chmod +x ./batch_download.sh
+
+./batch_download.sh -f ~/research/output_txt_file.txt -p
+
+
+
+
 
 #After saving this is a .py file
 #type into the terminal
