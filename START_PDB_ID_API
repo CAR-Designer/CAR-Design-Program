@@ -21,12 +21,15 @@ https://search.rcsb.org/index.html#search-api
 HOW TO GENERATE SEARCH REQUEST
 https://youtu.be/0fmb_LMA_i8?si=9rz4Fx3CdaM-v1pR
 _____________________________________________________________________________________
+##THIS IS THE SEARCH QUERY INTO PYTHON TO GET PDB FILES FOR TCR'S
+##SAVE IT AS A .py FILE
 
 import requests
 import json
 import urllib.parse
+import pandas as pd  # Import pandas
 
-search_request = {  # Example search request (replace with your actual query)
+search_request = {  # Example search request (replace with your actua>
     "query": {
         "type": "group",
         "nodes": [
@@ -41,7 +44,7 @@ search_request = {  # Example search request (replace with your actual query)
                 "type": "terminal",
                 "service": "text",
                 "parameters": {
-                    "attribute": "rcsb_entity_source_organism.ncbi_scientific_name",
+                    "attribute": "rcsb_entity_source_organism.ncbi_sc>
                     "value": "Homo sapiens",
                     "operator": "exact_match"
                 }
@@ -54,7 +57,7 @@ search_request = {  # Example search request (replace with your actual query)
         "results_content_type": ["experimental"],
         "sort": [
             {
-                "sort_by": "score",
+               "sort_by": "score",
                 "direction": "desc"
             }
         ],
@@ -65,17 +68,27 @@ search_request = {  # Example search request (replace with your actual query)
 
 # URL encode the JSON request
 url_encoded_request = urllib.parse.quote(json.dumps(search_request))
-url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded_request}"
+url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded>
 
-response = requests.get(url)  # Alternatively, use requests.post(url, json=search_request) for POST
+response = requests.get(url)  # Alternatively, use requests.post(url,>
 
 if response.status_code == 200:
     results = response.json()
-    # Process the results
-    print(results)
+    
+    # Depending on the structure of results, you might need to adjust>
+    # For example, if results is a list of entries:
+    df = pd.DataFrame(results)  # Create a DataFrame from results
+    
+    # Save results to a CSV file
+    df.to_csv('merged_data.csv', index=False)
+    
+    # Optionally, print the DataFrame to verify
+    print(df)
 else:
     print(f"Error: {response.status_code}")
     print(response.text)
+
+
 __________________________________________________________________
 
 #After saving this is a .py file
