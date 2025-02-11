@@ -1,7 +1,8 @@
 #Use OpenMM to assign hydrogen ions to the PDB files 
 #I would recommend starting with either AMBER ff19SB (with OPC or TIP3P water) or CHARMM36m (with the CHARMM-modified TIP3P water)
 #Generate grid poses
-#
+#Set grid box with autodocktools
+
 
 
 #Structure your files properly
