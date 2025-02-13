@@ -1,1 +1,100 @@
 
+
+
+
+import os
+import subprocess
+import simtk.openmm as mm
+from simtk.openmm.app import *
+from simtk.openmm.app import PME, HBonds
+import shutil  # For copying files
+
+# --- Configuration ---
+pdb_directory = "path/to/your/pdb/files"
+diffdock_directory = "path/to/your/diffdock/directory"  # Path to DiffDock scripts/environment
+# You might want to create a separate directory for the DiffDock outputs
+diffdock_output_directory = "path/to/diffdock/outputs"
+
+# --- Main Processing Loop ---
+for filename in os.listdir(pdb_directory):
+    if filename.endswith(".pdb"):
+        pdb_file_path = os.path.join(pdb_directory, filename)
+        base_name = filename[:-4]
+
+        # --- 1. PDBfixer ---
+        pdbfixer_output = f"{base_name}_fixed.pdb"
+        try:
+            subprocess.run(["pdb4amber", "--input", pdb_file_path, "--output", pdbfixer_output], check=True) # example for running pdb4amber, check pdbfixer documentation for your case
+        except subprocess.CalledProcessError as e:
+            print(f"PDBfixer error for {filename}: {e}")
+            continue  # Skip to the next file if PDBfixer fails
+
+        # --- 2. Modeler (Optional - adapt as needed) ---
+        modeler_output = f"{base_name}_modelled.pdb"
+        #... your Modeler code here, using pdbfixer_output as input...
+        # If not using Modeler, just copy the file:
+        shutil.copy2(pdbfixer_output, modeler_output) # copy if you skip modeling
+
+        # --- 3. OpenMM ---
+        openmm_output = f"{base_name}_optimized.pdb"
+        try:
+            pdb = PDBFile(modeler_output) # or fixed_protein.pdb if no modeling
+
+            forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml')
+            system = forcefield.createSystem(pdb.topology, nonbondedMethod=PME, nonbondedCutoff=1*nm, constraints=HBonds)
+            system.addForce(mm.MonteCarloBarostat(1*bar, 300*kelvin))
+
+
+            integrator = LangevinIntegrator(300*kelvin, 1/picosecond, 0.002*picoseconds)
+            simulation = Simulation(pdb.topology, system, integrator)
+            simulation.context.setPositions(pdb.positions)
+
+            simulation.minimizeEnergy()
+            simulation.addHydrogens(pdb.topology)
+
+            PDBFile.writeFile(simulation.topology, simulation.context.getState(getPositions=True).getPositions(), open(openmm_output, 'w'))
+
+            print(f"OpenMM processed {filename} successfully.")
+
+        except Exception as e:
+            print(f"OpenMM error for {filename}: {e}")
+            continue  # Skip to the next file if OpenMM fails
+
+        # --- 4. DiffDock ---
+        try:
+
+            # --- Prepare DiffDock input files ---
+            # You'll likely need to create a ligands.csv and other input files.
+            # This part is highly dependent on your DiffDock setup.
+            # Example: 
+            ligand_file = f"{base_name}_ligand.sdf" # Example: Assuming you have ligand file in the same directory
+            smiles_string = "Your Ligand SMILES" # Replace with actual SMILES string
+            # Create ligands.csv, complex.csv, etc. as needed
+
+            # --- Run DiffDock ---
+            diffdock_output_dir_for_file = os.path.join(diffdock_output_directory, base_name) # individual output directory for each file
+            os.makedirs(diffdock_output_dir_for_file, exist_ok=True) # create the directory if it doesn't exist
+            # This is a highly simplified example; adapt to your DiffDock command.
+            # You'll need to specify paths to your DiffDock scripts, the input files, and output directories.
+            diffdock_command = [
+                "python",  # Or your DiffDock execution command
+                os.path.join(diffdock_directory, "run_diffdock.py"), # example path, replace with your actual path
+                "--protein_pdb", openmm_output,
+                "--ligand_sdf", ligand_file, # Example, adapt to your ligand input
+                "--smiles", smiles_string,
+                "--output_dir", diffdock_output_dir_for_file,
+                #... other DiffDock arguments...
+            ]
+            subprocess.run(diffdock_command, check=True)
+
+            print(f"DiffDock run for {filename} successfully.")
+
+        except subprocess.CalledProcessError as e:
+            print(f"DiffDock error for {filename}: {e}")
+            continue # Skip to the next file if DiffDock fails
+
+        except Exception as e:
+            print(f"Error preparing or running DiffDock for {filename}: {e}")
+            continue
+
+print("Finished processing all PDB files.")
