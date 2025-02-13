@@ -12,7 +12,19 @@ Modeler
 
 #Set grid box with autodocktools
 
+import simtk.openmm as mm
+from simtk.openmm.app import *
 
+# Load your PDB file
+pdb = PDBFile('your_protein.pdb')
+
+# Create a forcefield object, specifying AMBER or CHARMM
+forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml')  # Example: AMBER
+
+# Create the OpenMM system
+system = forcefield.createSystem(pdb.topology)
+
+# ... rest of your OpenMM setup (adding hydrogens, minimization, etc.)
 
 #Structure your files properly
 
