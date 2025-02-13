@@ -1,0 +1,86 @@
+```python
+import os
+import subprocess
+
+# --- Configuration ---
+diffdock_output_directory = "path/to/diffdock/outputs"  # Path to DiffDock output directory
+ai_engine_directory = "path/to/ai/engine"  # Path to your AI mutation engine
+ai_engine_input_directory = "path/to/ai/engine/inputs"  # Directory for AI engine input files
+affinity_threshold = -10.0  # Example threshold for high affinity (kcal/mol) - adjust as needed
+
+# --- Function to extract PDB files and prepare input for AI engine ---
+def process_diffdock_output(diffdock_output_dir, ai_engine_input_dir):
+    """
+    Extracts PDB files from DiffDock output and prepares input for the AI engine.
+    """
+    for complex_name in os.listdir(diffdock_output_dir):
+        complex_dir = os.path.join(diffdock_output_dir, complex_name)
+        if os.path.isdir(complex_dir):
+            # Example: Assuming DiffDock outputs a binding_affinity.txt file
+            affinity_file = os.path.join(complex_dir, "binding_affinity.txt")
+            try:
+                with open(affinity_file, "r") as f:
+                    binding_affinity = float(f.readline().strip())
+
+                if binding_affinity <= affinity_threshold:  # Check if affinity is high enough
+                    # Example: Assuming DiffDock outputs a docked_complex.pdb file
+                    pdb_file = os.path.join(complex_dir, "docked_complex.pdb")
+                    # Copy the PDB file to the AI engine input directory
+                    shutil.copy2(pdb_file, ai_engine_input_dir)
+
+                    print(f"Copied {pdb_file} to AI engine input directory.")
+
+            except FileNotFoundError:
+                print(f"Binding affinity file not found for {complex_name}. Skipping.")
+            except ValueError:
+                print(f"Could not parse binding affinity from {affinity_file}. Skipping.")
+
+
+# --- Main execution ---
+# 1. Process DiffDock outputs
+process_diffdock_output(diffdock_output_directory, ai_engine_input_directory)
+
+# 2. Run the AI mutation engine
+# This is a placeholder; adapt to your AI engine execution command
+try:
+    ai_engine_command = [
+        "python",  # Or your AI engine execution command
+        os.path.join(ai_engine_directory, "run_ai_engine.py"),  # Example path
+        "--input_dir", ai_engine_input_directory,
+        #... other AI engine arguments...
+    ]
+    subprocess.run(ai_engine_command, check=True)
+    print("AI engine run successfully.")
+
+except subprocess.CalledProcessError as e:
+    print(f"AI engine error: {e}")
+
+print("Finished processing.")
+
+```
+
+**Key Components and Explanations:**
+
+1. **Configuration:** Set the paths to your DiffDock output directory, AI engine directory, and the input directory for your AI engine. Also, adjust the `affinity_threshold` to define what you consider "high affinity."
+
+2. **`process_diffdock_output()` Function:**
+   * Takes the DiffDock output directory and AI engine input directory as arguments.
+   * Iterates through each subdirectory (complex) in the DiffDock output directory.
+   * Reads the binding affinity from a file (e.g., "binding_affinity.txt"). *Adapt this if your DiffDock output has a different format.*
+   * Checks if the binding affinity is higher (more negative) than the threshold.
+   * If the affinity is high enough, it copies the docked PDB file (e.g., "docked_complex.pdb") to the AI engine input directory. *Adapt this if your DiffDock output has a different format.*
+
+3. **Main Execution:**
+   * Calls the `process_diffdock_output()` function to prepare the input for the AI engine.
+   * Runs the AI mutation engine. *The `ai_engine_command` is a placeholder; replace it with the actual command to run your AI engine.*
+
+**Important Considerations:**
+
+* **DiffDock Output Format:** Make sure you understand the format of your DiffDock output. You'll need to adapt the code to correctly read the binding affinity and identify the docked PDB file.
+* **AI Engine Input:** Ensure that the AI engine's input directory and file format are compatible with how you're copying the PDB files.
+* **AI Engine Command:** Replace the placeholder `ai_engine_command` with the actual command to run your AI engine.
+* **Error Handling:** Consider adding more robust error handling to catch potential issues like missing files or incorrect formats.
+* **File Naming:** The script assumes a specific naming convention for the output files from DiffDock. Adjust the code if your DiffDock output uses different file names.
+* **Dependencies:** Ensure you have the necessary libraries installed (e.g., `os`, `subprocess`, `shutil`).
+
+This program provides a basic framework for connecting your DiffDock output to an AI mutation engine. You'll need to adapt it based on the specifics of your DiffDock output, AI engine, and overall workflow. Remember to test it thoroughly with a small subset of files before running it on your entire dataset.
