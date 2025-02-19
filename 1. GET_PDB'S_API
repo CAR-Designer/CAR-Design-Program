@@ -112,18 +112,25 @@ with open('idtxtoutputs.txt', 'w') as output_file:
     output_file.write(identifier_string)
 
 ______________________________________________________________________________
+#GET THE OUTPUT TEXT FILE 'idtxtoutputs.txt' AND USE THE API TO GET THE 70K PDB FILES BACK INTO A FOLDER
 
-#GET THE OUTPUT TEXT FILE 'out_txt_file.txt' AND USE THE API TO GET THE 70K PDB FILES BACK INTO A FOLDER
 
+#GET BATCH DOWNLOAD SCRIPT
+wget https://www.rcsb.org/scripts/batch_download.sh
+
+#GIVE IT PRIVILEDGES
 chmod +x ./batch_download.sh
 
-./batch_download.sh -f ~/research/output_txt_file.txt -p
+#RUN THE DOWNLOAD IN THE BACKGROUND OF EC2 SO YOU CAN CLOSE WINDOWS AND WALK AWAY AND COME BACK LATER SSH IN AND CHECK PROGRESS
+#DONT STOP THE INSTANCE BUT YOU CAN CLOSE THE WINDOWS AFTER RUNNING THIS AND IT WILL DOWNLOAD TO IDTXTOUTPUTS.TXT AND BATCH_DOWNLOAD.OUT FOLDERS
+
+nohup ./batch_download.sh -f ~/carfolder/idtxtoutputs.txt -p > batch_download.out 2>&1 &
 
 
+#YOU CAN SSH IN
+#TO CHECK THE PROGRESS LIVE
+tail -f batch_download.out
 
+#COUNT HOW MANY ARE OUTPUTTED CD INTO FOLDER AND RUN
+ls -1 | wc -l
 
-
-#After saving this is a .py file
-#type into the terminal
-
-python3 <name_of_python_file.py>
