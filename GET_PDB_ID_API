@@ -2,24 +2,15 @@ How to get PDB ID's so you can put them in CSV list for batch download
 
 Original Guide-
 https://www.rcsb.org/docs/programmatic-access/web-apis-overview#search-api
-______________________________________________________________________________
+________________________________TRY THIS
 
-pip3 install requests
-
-cd into a folder you would store general documents
-nano
-COPY PASTE THE FOLLOWING AND ADD YOUR OWN STUFF TO IT
-ctrl+o + ENTER
-pdb_request1.py
-ENTER
-ctrl+X
-
-_____________________________________________________________________________________
 GUIDE
 https://search.rcsb.org/index.html#search-api
 
 HOW TO GENERATE SEARCH REQUEST
 https://youtu.be/0fmb_LMA_i8?si=9rz4Fx3CdaM-v1pR
+
+Download Pandas first
 _____________________________________________________________________________________
 ##THIS IS THE SEARCH QUERY INTO PYTHON TO GET PDB FILES FOR TCR'S
 ##SAVE IT AS A .py FILE
@@ -29,7 +20,7 @@ import json
 import urllib.parse
 import pandas as pd  # Import pandas
 
-search_request = {  # Example search request (replace with your actua>
+search_request = {  # Example search request (replace with your actual data)
     "query": {
         "type": "group",
         "nodes": [
@@ -44,7 +35,7 @@ search_request = {  # Example search request (replace with your actua>
                 "type": "terminal",
                 "service": "text",
                 "parameters": {
-                    "attribute": "rcsb_entity_source_organism.ncbi_sc>
+                    "attribute": "rcsb_entity_source_organism.ncbi_scientific_name",
                     "value": "Homo sapiens",
                     "operator": "exact_match"
                 }
@@ -57,7 +48,7 @@ search_request = {  # Example search request (replace with your actua>
         "results_content_type": ["experimental"],
         "sort": [
             {
-               "sort_by": "score",
+                "sort_by": "score",
                 "direction": "desc"
             }
         ],
@@ -68,14 +59,14 @@ search_request = {  # Example search request (replace with your actua>
 
 # URL encode the JSON request
 url_encoded_request = urllib.parse.quote(json.dumps(search_request))
-url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded>
+url = f"https://search.rcsb.org/rcsbsearch/v2/query?json={url_encoded_request}"
 
-response = requests.get(url)  # Alternatively, use requests.post(url,>
+response = requests.get(url)  # Alternatively, use requests.post(url, ...)
 
 if response.status_code == 200:
     results = response.json()
     
-    # Depending on the structure of results, you might need to adjust>
+    # Depending on the structure of results, you might need to adjust this part
     # For example, if results is a list of entries:
     df = pd.DataFrame(results)  # Create a DataFrame from results
     
@@ -88,24 +79,40 @@ else:
     print(f"Error: {response.status_code}")
     print(response.text)
 
-__________________________________________________________________
-#AFTER YOU GET MERGED_DATA.CSV FILE BACK WITH THE LIST OF PDB ID'S
-#WE PARSE THE LIST AND FILTER EVERYTHING TO GET ONLY PDB ID'S
 
-import csv
 
-def csv_to_txt(csv_file, txt_file):
-    with open(csv_file, 'r') as csvfile, open(txt_file, 'w') as txtfi>
-        reader = csv.reader(csvfile)
-        all_rows = []  # Accumulate the rows
-        for row in reader:
-            all_rows.extend(row)  # Add the elements of current row t>
+import re
 
-        txtfile.write(','.join(all_rows)) # Write a single comma sepa>
+# Read the file (replace 'your_file.txt' with your actual file name)
+with open('merged_data.csv', 'r') as file:
+    lines = file.readlines()
 
-csv_to_txt('merged_data.csv', 'output_txt_file.txt')
+# Regular expression to match the identifier value (e.g., '6JXR', '7FJD', etc.)
+pattern = r"'identifier':\s?'([A-Za-z0-9]+)'"
 
-________________________________________________________________
+# List to store extracted identifiers
+identifiers = []
+
+# Loop through each line in the file
+for line in lines:
+    # Search for the identifier pattern
+    match = re.search(pattern, line)
+    if match:
+        # Append the identifier to the list
+        identifiers.append(match.group(1))
+
+# Create a comma-separated string of identifiers
+identifier_string = ",".join(identifiers)
+
+# Output the result
+print("Extracted Identifiers:", identifier_string)
+
+# Save the result to a .txt file
+with open('idtxtoutputs.txt', 'w') as output_file:
+    output_file.write(identifier_string)
+
+______________________________________________________________________________
+
 #GET THE OUTPUT TEXT FILE 'out_txt_file.txt' AND USE THE API TO GET THE 70K PDB FILES BACK INTO A FOLDER
 
 chmod +x ./batch_download.sh
