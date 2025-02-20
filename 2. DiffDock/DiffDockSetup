@@ -5,6 +5,9 @@
 
 binding_site_residues =
 
+Try Tyr5, Glu63, Lys66, Tyr84, Trp147, and Tyr159
+or
+Tyr5, Tyr9, Glu63, Tyr159, Glu63, Val67, Lys66, and Tyr99, Asp77, Trp147, Ala150, Tyr116, Lys66, Arg97, Thr143, Tyr84, Thr143,Trp147
 
 ______________________________________________________
 Run pdb from tcrs, CDR3, Vl, Vh
