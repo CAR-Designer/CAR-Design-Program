@@ -1,0 +1,69 @@
+import random
+import numpy as np
+from rdkit import Chem
+from rdkit.Chem import AllChem
+from rdkit.Chem import rdMolTransforms
+
+# Define the target receptor (replace with your actual receptor)
+target_receptor = Chem.MolFromPDBFile("target_receptor.pdb")
+
+# Define the initial ligand (replace with a sensible starting point)
+initial_ligand = Chem.MolFromSmiles("CC(=O)Oc1ccccc1")
+
+# Define the scoring function (replace with your actual scoring function)
+def score_ligand(ligand, target):
+    """
+    Calculates a score for the ligand based on its interaction with the target.
+    Lower scores are better.
+    """
+    # Example: Use the docking score from a docking program (e.g., Vina)
+    #... (code to run docking and extract the score)...
+    return docking_score
+
+# Define the Monte Carlo parameters
+num_iterations = 1000
+temperature = 1.0
+
+# Initialize the current ligand and score
+current_ligand = initial_ligand
+current_score = score_ligand(current_ligand, target_receptor)
+
+# Perform the Monte Carlo simulation
+for i in range(num_iterations):
+    # Generate a new ligand by randomly modifying the current ligand
+    new_ligand = modify_ligand(current_ligand)
+
+    # Calculate the score of the new ligand
+    new_score = score_ligand(new_ligand, target_receptor)
+
+    # Accept the new ligand based on the Metropolis criterion
+    if new_score < current_score or random.random() < np.exp(-(new_score - current_score) / temperature):
+        current_ligand = new_ligand
+        current_score = new_score
+
+    # Print the current iteration and score
+    print(f"Iteration {i + 1}: Score = {current_score}")
+
+# Save the final ligand
+Chem.MolToPDBFile(current_ligand, "final_ligand.pdb")
+
+# --- Helper function to modify the ligand ---
+def modify_ligand(ligand):
+    """
+    Randomly modifies the ligand by:
+    - Adding a random functional group
+    - Removing a random atom
+    - Changing a bond type
+    - Rotating a bond
+    """
+    # Example: Add a random functional group
+    functional_groups = ["[NH2]", "[OH]", "[COOH]", "[F]", "[Cl]", "[Br]"]
+    random_group = random.choice(functional_groups)
+    new_ligand = AllChem.ReplaceSubstructs(ligand, Chem.MolFromSmiles("*"), Chem.MolFromSmiles(random_group), replaceAll=False)
+
+    # Example: Rotate a bond
+    bond = random.choice(new_ligand.GetBonds())
+    angle = random.uniform(-np.pi, np.pi)
+    rdMolTransforms.SetDihedralDeg(new_ligand.GetConformer(), bond.GetBeginAtomIdx(), bond.GetEndAtomIdx(), angle)
+
+    return new_ligand
