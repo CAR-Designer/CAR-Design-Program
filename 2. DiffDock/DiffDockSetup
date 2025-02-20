@@ -1,7 +1,12 @@
 #Use OpenMM to assign hydrogen ions to the PDB files 
 #I would recommend starting with either AMBER ff19SB (with OPC or TIP3P water) or CHARMM36m (with the CHARMM-modified TIP3P water)
 #Generate grid poses
+#If you know that the binding site on HLA-A2 involves residues 62, 63, 66, 67, 70, 74, 95, 97, 99, and 114, you can provide this information to DiffDock as a list:
 
+binding_site_residues =
+
+
+______________________________________________________
 Run pdb from tcrs, CDR3, Vl, Vh
 
 Use openmm [AMBER ff19SB or CHARMM36m] on pdb before autodock4
