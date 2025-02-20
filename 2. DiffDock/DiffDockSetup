@@ -12,13 +12,13 @@ Tyr5, Tyr9, Glu63, Tyr159, Glu63, Val67, Lys66, and Tyr99, Asp77, Trp147, Ala150
 ______________________________________________________
 Run pdb from tcrs, CDR3, Vl, Vh
 
-Use openmm [AMBER ff19SB or CHARMM36m] on pdb before autodock4
+Use openmm [AMBER ff19SB or CHARMM36m] on pdb
 
 Pdbfile
 Pdbfixer
 Modeler
 
-#Set grid box with autodocktools
+
 
 import simtk.openmm as mm
 from simtk.openmm.app import *
