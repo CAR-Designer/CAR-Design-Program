@@ -33,6 +33,7 @@ conda install -c conda-forge pdbfixer
 
 #FIX THE PDB
 pdbfixer your_protein.pdb output.pdb
+=>***have it name outputs with 'fixed' at end of prev name***
 
 
 >>>>>>>end/pause<<<<<
@@ -73,6 +74,54 @@ data/
     tcr5.pdb
 
 ______________________________________________
+sudo apt-get install rlwrap
+
+Add VMD
+Download From VMD Website
+Upload to Server
+Extract the file
+CD into VMD-1.9.4A57
+
+ 2) Edit the file 'configure'; change the values for
+     the $install_library_dir and $install_bin_dir to a directory in
+     which vmd data files and executables should be installed, be sure
+     that you installing into a clean target directory and not overwriting
+     an existing version of VMD (which would otherwise give problems):
+
+     $install_bin_dir is the location of the startup script 'vmd'.
+     It should be located in the path of users interested in running VMD.
+
+     $install_library_dir is the location of all other VMD files.
+     This included the binary and helper scripts.  It should not be
+     in the path.
+
+  3) A Makefile must be generated based on these configuration variables
+     by running "./configure".
+
+  4) After configuration is complete, cd to the src directory,
+     become root or use sudo if necessary, e.g., for installation
+     of VMD into /usr/local or other permission-protected system directories,
+     and type "make install".  This will install VMD in the two
+     directories listed above.  Note that running "make install"
+     twice will print error messages because you are attempting to
+     overwrite some read-only files.  Similarly, if you have incorrectly
+     specified the target installation directories or attempt to overwrite
+     an existing VMD installation, you will get error messages.
+
+  5) When installed, type 'vmd' to start (make sure the
+     $install_bin_dir directory is in your path).
+
+cd into bin
+nano into vmd.sh
+copy paste this at the top
+'
+# Set the VMD installation directory (adjust this path to your actual VMD path)
+export VMDINSTALLDIR=/path/to/vmd-1.9.4a57
+export VMD_LIBRARY_PATH=$VMDINSTALLDIR/lib
+export VMD_PLUGIN_PATH=$VMDINSTALLDIR/plugins
+export PATH=$PATH:$VMDINSTALLDIR/bin
+'
+
 #Learn to run parallel processing for DiffDock to speed things up
 _______________________________________________
 
