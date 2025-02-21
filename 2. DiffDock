@@ -24,7 +24,9 @@ ______________________________________________________
   
   curl -o toppar_ions_won.str https://www.charmm-gui.org/?doc=open_toppar&filename=stream/misc/toppar_ions_won.str
 
+#Move these into charmm36.ff file
 
+____________________________________________________
 conda install -c conda-forge openmm parmed
 conda install -c conda-forge pdbfixer
 
