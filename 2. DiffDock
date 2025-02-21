@@ -13,7 +13,7 @@ Tyr5, Tyr9, Glu63, Tyr159, Glu63, Val67, Lys66, and Tyr99, Asp77, Trp147, Ala150
 ______________________________________________________
 Run pdb from tcrs, CDR3, Vl, Vh
 
-Use openmm [AMBER ff19SB or CHARMM36m] on pdb
+Use openmm [CHARMM36m with TIP3p] on pdb
 
 Pdbfile
 Pdbfixer
