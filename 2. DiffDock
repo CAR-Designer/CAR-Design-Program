@@ -13,7 +13,7 @@
 ______________________________________________________
 Run pdb from tcrs, CDR3, Vl, Vh
 
-Use openmm [CHARMM36m with TIP3p or Amber ff14SB with TIP3p] on pdb
+Use openmm [CHARMM27 with TIP3p or Amber ff14SB with TIP3p] on pdb
 
 Pdbfile
 Pdbfixer
