@@ -18,6 +18,8 @@ ______________________________________________________
 #curl -o custom_filename.rtf https://url.com
 
   curl -o charmm36.rtf https://www.charmm-gui.org/?doc=open_toppar&filename=top_all36_prot.rtf
+
+curl -o top_all36_prot.rtf https://www.charmm-gui.org/?doc=open_toppar&filename=top_all36_prot.rtf
   
   curl -o charmm36.prm https://www.charmm-gui.org/?doc=open_toppar&filename=par_all36_prot.prm
   
@@ -73,54 +75,33 @@ data/
     tcr4.pdb
     tcr5.pdb
 
-______________________________________________
+INSTALLING VMD______________________________________________
 sudo apt-get install rlwrap
 
 Add VMD
 Download From VMD Website
 Upload to Server
 Extract the file
-CD into VMD-1.9.4A57
+tar -xvzf vmd-1.9.4a57.bin.LINUXAMD64-CUDA102-OptiX650-OSPRay185.opengl.tar.gz
 
- 2) Edit the file 'configure'; change the values for
-     the $install_library_dir and $install_bin_dir to a directory in
-     which vmd data files and executables should be installed, be sure
-     that you installing into a clean target directory and not overwriting
-     an existing version of VMD (which would otherwise give problems):
+cd vmd-1.9.4a57
 
-     $install_bin_dir is the location of the startup script 'vmd'.
-     It should be located in the path of users interested in running VMD.
+nano configure
 
-     $install_library_dir is the location of all other VMD files.
-     This included the binary and helper scripts.  It should not be
-     in the path.
+##Replace whats in there with this##
+# Directory where VMD startup script is installed, should be>
+$install_bin_dir="/usr/local/bin";
 
-  3) A Makefile must be generated based on these configuration variables
-     by running "./configure".
+# Directory where VMD files and executables are installed
+$install_library_dir="/home/ubuntu/vmdlib";
 
-  4) After configuration is complete, cd to the src directory,
-     become root or use sudo if necessary, e.g., for installation
-     of VMD into /usr/local or other permission-protected system directories,
-     and type "make install".  This will install VMD in the two
-     directories listed above.  Note that running "make install"
-     twice will print error messages because you are attempting to
-     overwrite some read-only files.  Similarly, if you have incorrectly
-     specified the target installation directories or attempt to overwrite
-     an existing VMD installation, you will get error messages.
+ctrl o enter ctrl x
 
-  5) When installed, type 'vmd' to start (make sure the
-     $install_bin_dir directory is in your path).
+./configure
 
-cd into bin
-nano into vmd.sh
-copy paste this at the top
-'
-# Set the VMD installation directory (adjust this path to your actual VMD path)
-export VMDINSTALLDIR=/path/to/vmd-1.9.4a57
-export VMD_LIBRARY_PATH=$VMDINSTALLDIR/lib
-export VMD_PLUGIN_PATH=$VMDINSTALLDIR/plugins
-export PATH=$PATH:$VMDINSTALLDIR/bin
-'
+cd src
+sudo make install
+
 
 #Learn to run parallel processing for DiffDock to speed things up
 _______________________________________________
