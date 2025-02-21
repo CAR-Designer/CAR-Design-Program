@@ -9,16 +9,38 @@
 #Try Tyr5, Glu63, Lys66, Tyr84, Trp147, and Tyr159
 #or
 #Tyr5, Tyr9, Glu63, Tyr159, Glu63, Val67, Lys66, and Tyr99, Asp77, Trp147, Ala150, Tyr116, Lys66, Arg97, Thr143, Tyr84, Thr143,Trp147
-
 ______________________________________________________
-Run pdb from tcrs, CDR3, Vl, Vh
+______________________________________________________
+#Get Charmm36 charge rtfs
+#http://mackerell.umaryland.edu/charmm_ff.shtml#gromacs
+
+curl -O http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2022.ff.tgz
+or
+#Download CHARMM36 Charge RTFs here
+https://www.charmm-gui.org/?doc=open_toppar&filename=top_all36_prot.rtf
+https://www.charmm-gui.org/?doc=open_toppar&filename=par_all36_prot.prm
+#this is the TIP3P model
+https://www.charmm-gui.org/?doc=open_toppar&filename=toppar_water_ions.str
+https://www.charmm-gui.org/?doc=open_toppar&filename=stream/misc/toppar_ions_won.str
+
+tar -xzf charmm36-jul2022.ff.tgz
+
+conda install -c conda-forge openmm parmed
+conda install -c conda-forge pdbfixer
+
+#FIX THE PDB
+pdbfixer your_protein.pdb output.pdb
+
+
+>>>>>>>end/pause<<<<<
+Maybe or maybe not do this depending where you got the PDB files...
 
 Use openmm [CHARMM36 TIP3p with TIP3p or Amber ff14SB with TIP3p] on pdb
 
 Pdbfile
 Pdbfixer
 Modeler
-
+_______________________
 
 
 import simtk.openmm as mm
